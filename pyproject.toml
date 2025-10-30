@@ -8,9 +8,9 @@ authors = [
 ]
 requires-python = ">=3.13"
 dependencies = [
-    "click>=8.1.8",
-    "pyyaml>=6.0.2",
-    "rich>=13.9.4",
+    "click>=8.3.0",
+    "pyyaml>=6.0.3",
+    "rich>=14.2.0",
 ]
 
 [project.scripts]
@@ -18,7 +18,7 @@ dk = "dk.main:cli"
 
 [dependency-groups]
 dev = [
-    "ruff>=0.9.4",
+    "ruff>=0.14.2",
 ]
 
 [build-system]
@@ -37,7 +37,7 @@ line-length = 120
 docstring-code-format = true
 docstring-code-line-length = "dynamic"
 indent-style = "space"
-quote-style = "single"
+quote-style = "double"
 
 [tool.ruff.lint]
 # Pyflakes, pycodestyle, flake8-simplify, pyupgrade
