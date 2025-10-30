@@ -1,5 +1,5 @@
 [project]
-name = "devkit"
+name = "dk"
 version = "0.1.0"
 description = "CLI tool for conveniences in local development."
 readme = "README.md"
@@ -14,7 +14,7 @@ dependencies = [
 ]
 
 [project.scripts]
-devkit = "devkit.main:cli"
+dk = "dk.main:cli"
 
 [dependency-groups]
 dev = [

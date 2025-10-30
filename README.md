@@ -1,19 +1,19 @@
-# devkit
+# dk
 
 CLI tool providing convenience scripts for my local development.
 
 ### Installation and usage
 
-Install devkit as a `uv` tool.
+Install dk as a `uv` tool.
 
 ```sh
-uv tool install git+https://github.com/joerisner/devkit
+uv tool install git+https://github.com/joerisner/dk
 ```
 
-Once devkit is installed, as long as your `uv` tool bin dir is on your `PATH`, you should be able to run devkit without issue.
+Once dk is installed, as long as your `uv` tool bin dir is on your `PATH`, you should be able to run dk without issue.
 
 ```sh
-devkit --help
+dk --help
 ```
 
 ## Development
@@ -34,8 +34,8 @@ See additional `make` targets by viewing the [Makefile](./Makefile) or by runnin
 
 ### Using the CLI
 
-During development, use `uv` to run `devkit`.
+During development, use `uv` to run `dk`.
 
 ```sh
-uv run devkit --help
+uv run dk --help
 ```
