@@ -8,6 +8,8 @@ BLUE='\033[34;1m'
 DIM_WHITE='\033[37;2m'
 RESET='\033[0m'
 
+FAILURES=0
+
 run_check() {
     local desc=$1
     local cmd=$2
@@ -19,8 +21,8 @@ run_check() {
         printf "${GREEN}✔${RESET} %s\n" "$desc"
     else
         printf "${RED}✘${RESET} %s\n" "$desc"
-        printf "  ${DIM_WHITE}- hint: run \`%s\` to troubleshoot${RESET}\n" "$cmd"
-        exit 1
+        printf "  ${DIM_WHITE}↳ hint: run \`%s\` to troubleshoot${RESET}\n" "$cmd"
+        FAILURES=$((FAILURES + 1))
     fi
 }
 
@@ -29,9 +31,15 @@ printf "∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞\n"
 printf "∞∞∞∞∞∞∞∞ ${BLUE}CI${RESET} ∞∞∞∞∞∞∞∞\n"
 printf "∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞\n\n"
 
-run_check "ruff lint" "uv run ruff check"
+run_check "ruff lint" "uv run ruff check ."
 run_check "ruff format" "uv run ruff format --check"
 
+if [[ $FAILURES -gt 0 ]]; then
+    # shellcheck disable=SC2059
+    printf "\n🚫 CI ${RED}failed${RESET}\n"
+    printf "∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞\n\n"
+    exit 1
+fi
 # shellcheck disable=SC2059
 printf "\n🚀 CI ${GREEN}passed${RESET}\n"
 printf "∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞\n\n"
