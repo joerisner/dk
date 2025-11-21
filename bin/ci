@@ -32,7 +32,7 @@ printf "∞∞∞∞∞∞∞∞ ${BLUE}CI${RESET} ∞∞∞∞∞∞∞∞\n"
 printf "∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞\n\n"
 
 run_check "ruff lint" "uv run ruff check ."
-run_check "ruff format" "uv run ruff format --check"
+run_check "ruff format" "uv run ruff format --check ."
 
 if [[ $FAILURES -gt 0 ]]; then
     # shellcheck disable=SC2059
