@@ -1,48 +1,24 @@
 #!/usr/bin/env bash
 
-# Install `uv` if it doesn't exist, check for specific `uv` configuration,
-# and ensure the project's required Python version is installed (using `uv`).
+# Install `uv` if it doesn't exist, and ensure the project's required Python version is installed (using `uv`).
 
 info() { printf "\033[0;35m%s\033[0m\n" "${1}"; }
-error() { printf "\033[0;31mERROR: %s\033[0m\n" "${1}"; }
-success() { printf "\033[0;32m%s\033[0m\n" "${1}"; }
+success() { printf "\033[0;32m✔︎\033[0m %s\n" "${1}"; }
 
 check_for_uv() {
   if ! command -v uv >/dev/null; then
     info "Installing uv..."
     brew update && brew install uv
-  fi
-}
-
-check_uv_config() {
-  if [[ -z "${UV_DIR}" ]]; then
-    error "Missing required'UV_DIR' environment variable."
-    exit 1
-  fi
-
-  if [[ -z "${UV_CONFIG_FILE}" ]]; then
-    error "Missing required 'UV_CONFIG_FILE' environment variable."
-    exit 1
-  fi
-
-  if [[ ! -d "${UV_DIR}" ]]; then
-    info "Missing directory for uv. Creating directory..."
-    mkdir -p "${UV_DIR}"
-  fi
-
-  if [[ ! -f "${UV_CONFIG_FILE}" ]]; then
-    info "Missing configuration file for uv. Creating config file..."
-    touch "${UV_CONFIG_FILE}"
+    success "Installed uv"
   fi
 }
 
 check_python_version() {
   REQUIRED_VERSION=$(head -n 1 ".python-version")
-  uv python find "${REQUIRED_VERSION}" >/dev/null 2>&1 || uv python install --preview --default
+  uv python find "${REQUIRED_VERSION}" >/dev/null 2>&1 || uv python install --default
 }
 
 check_for_uv
-check_uv_config
 check_python_version
 
 success "Setup complete!"

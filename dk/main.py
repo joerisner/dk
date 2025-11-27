@@ -9,8 +9,10 @@ CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
 @click.group(context_settings=CONTEXT_SETTINGS)
 @click.version_option()
 @click.pass_context
-def cli(ctx):
-    """A CLI for local development conveniences"""
+def cli(ctx: click.Context) -> None:
+    """
+    A CLI for local development conveniences
+    """
     config = load_config()
     ctx.obj = {"config": config}
 
