@@ -1,6 +1,6 @@
 # dk
 
-CLI tool providing convenience scripts for my local development.
+`dk` is CLI, written in Python, that manages my local MacOS development environment.
 
 ### Installation and usage
 

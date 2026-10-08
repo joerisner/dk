@@ -1,7 +1,7 @@
 [project]
 name = "dk"
 version = "0.1.0"
-description = "CLI tool for conveniences in local development."
+description = "MacOS development environment manager."
 readme = "README.md"
 authors = [
     { name = "Joe Risner" }
@@ -13,17 +13,18 @@ dependencies = [
     "rich>=15.0.0",
 ]
 
-[project.scripts]
-dk = "dk.main:cli"
-
 [dependency-groups]
 dev = [
-    "ruff>=0.16.6",
+    "ruff>=0.16.9",
+    "ty>=0.0.85",
 ]
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[project.scripts]
+dk = "dk.main:cli"
 
 #################
 ##### Tools #####
@@ -35,8 +36,6 @@ line-length = 120
 [tool.ruff.format]
 docstring-code-format = true
 docstring-code-line-length = "dynamic"
-indent-style = "space"
-quote-style = "double"
 
 [tool.ruff.lint]
 select = [
@@ -48,8 +47,9 @@ select = [
     "S",     # flake8-bandit
     "UP",    # pyupgrade
     "I",     # isort
-    "FAST",  # fastapi
-    "N"      # pep8-naming
+    "N",     # pep8-naming
+    "C901",  # mccabe complexity
+    "PLR09"  # pylint-refactor-too-many
 ]
 ignore = [
     "S603"   # allow `subprocess` invocation
