@@ -1,0 +1,40 @@
+# https://taskfile.dev
+version: '3'
+
+silent: true
+
+tasks:
+  default:
+    cmds:
+      - task: help
+
+  build:
+    desc: Build the project
+    cmds:
+      - uv build
+
+  clean:
+    desc: Remove temporary artifacts
+    cmds:
+      - bin/clean
+
+  install:
+    desc: Install dependencies and update the environment
+    cmds:
+      - uv sync
+
+  lint:
+    desc: Run lint and format checks
+    cmds:
+      - uv run ruff check .
+      - uv run ruff format --check .
+
+  setup:
+    desc: Setup the project
+    cmds:
+      - bin/setup
+
+  help:
+    desc: Show this help
+    cmds:
+      - task --list

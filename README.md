@@ -18,19 +18,19 @@ dk --help
 
 ## Development
 
-This project uses `uv` for managing Python versions, dependencies, and the project's environment. Run the (opinionated) `setup` target to get started with `uv`.
+This project uses `uv` for managing Python versions, dependencies, and the project's environment. Run the setup script to get started with `uv`.
 
 ```sh
-make setup
+task setup
 ```
 
 Once the project is setup with `uv`, create the virtual environment and install dependencies.
 
 ```sh
-make install
+task install
 ```
 
-See additional `make` targets by viewing the [Makefile](./Makefile) or by running `make help` (or just `make`).
+See additional tasks by viewing the [Taskfile](./taskfile.yml) or by running `task`.
 
 ### Using the CLI
 
