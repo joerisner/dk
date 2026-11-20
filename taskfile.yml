@@ -34,6 +34,11 @@ tasks:
     cmds:
       - bin/setup
 
+  test:
+    desc: Run tests
+    cmds:
+      - uv run pytest
+
   help:
     desc: Show this help
     cmds:
