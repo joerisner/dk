@@ -11,3 +11,8 @@ wheels/
 
 # Ruff
 .ruff_cache/
+
+# Pytest
+.pytest_cache/
+tests/coverage/
+tests/test_results/
