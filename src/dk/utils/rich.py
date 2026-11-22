@@ -31,3 +31,9 @@ def warn(msg: str) -> None:
     """Print a warning to the console using Rich."""
     console = Console(theme=theme, stderr=True)
     console.print(f"[warn]Warning:[/warn] {msg}")
+
+
+def success(msg: str) -> None:
+    """Print a success message to the console using Rich."""
+    console = Console(theme=theme)
+    console.print(f"[success]✔[/success] {msg}")

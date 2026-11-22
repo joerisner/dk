@@ -1,5 +1,6 @@
 import click
 
+from .commands.docker import docker
 from .commands.sync import sync
 from .config import load_user_settings
 
@@ -11,10 +12,11 @@ CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
 @click.pass_context
 def cli(ctx: click.Context) -> None:
     """
-    A CLI for local development conveniences
+    A CLI for MacOS local development utilities
     """
     user_settings = load_user_settings()
     ctx.obj = {"user_settings": user_settings}
 
 
 cli.add_command(sync)
+cli.add_command(docker)

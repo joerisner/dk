@@ -1,2 +1,2 @@
-from .rich import error, out, warn
+from .rich import error, out, success, warn
 from .shell import run_cmd
