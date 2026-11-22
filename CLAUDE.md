@@ -29,3 +29,4 @@ task test         # run tests
 
 - Report findings with a confidence level and cite the exact `file:line` you verified against. If you cannot verify, say so instead of asserting.
 - Flag newly-added files that aren't source or intentional config — scratch output, logs, session artifacts, stray dumps, etc.
+- For each finding, propose suggestions with the smallest change that resolves the issue while respecting existing patterns across the codebase.

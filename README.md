@@ -1,6 +1,6 @@
 # dk
 
-`dk` is CLI, written in Python, that manages my local MacOS development environment.
+`dk` is a personal CLI that manages my local MacOS development environment.
 
 ### Installation and usage
 
