@@ -22,7 +22,7 @@ task test         # run tests
 
 ### Click CLI
 
-- `src/dk/config.py` - reads YAML from `$DK_CONFIG_FILE` (or `~/.config/dk/config.yml`) and project-level settings from `dk.yml`.
+- `src/dk/config.py` - reads YAML from `~/.config/dk/config.yml` and project-level settings from `<project>/dk.yml`.
 - `src/dk/commands/` - `click` commands are individual files.
 
 ## Code Review Rules
