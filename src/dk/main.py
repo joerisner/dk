@@ -1,7 +1,7 @@
 import click
 
 from .commands.sync import sync
-from .config import load_config
+from .config import load_user_settings
 
 CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
 
@@ -13,8 +13,8 @@ def cli(ctx: click.Context) -> None:
     """
     A CLI for local development conveniences
     """
-    config = load_config()
-    ctx.obj = {"config": config}
+    user_settings = load_user_settings()
+    ctx.obj = {"user_settings": user_settings}
 
 
 cli.add_command(sync)

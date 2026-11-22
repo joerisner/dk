@@ -1,43 +1,10 @@
 import sys
 from pathlib import Path
-from typing import Any
 
 import click
 
+from ..config import UserSettings
 from ..utils import error, out, run_cmd, warn
-
-
-def validate_config(config: Any) -> None:
-    if config is None or "sync" not in config or config["sync"] is None:
-        error(
-            msg="Missing required sync configuration",
-            tip="Add a 'sync' node to the dk config file to sync repositories",
-        )
-        sys.exit(1)
-
-    if "projects_dir" not in config["sync"]:
-        error(
-            msg="Missing required 'projects_dir' value in sync configuration",
-            tip="Assign to 'projects_dir' the directory (relative to HOME) where your projects are found",
-        )
-        sys.exit(1)
-
-    if "repositories" not in config["sync"]:
-        error(
-            msg="Missing required 'repositories' list in sync configuration",
-            tip="Assign to 'repositories' a list of projects to sync",
-        )
-        sys.exit(1)
-
-
-def get_config() -> dict[str, Any]:
-    config = click.get_current_context().obj["config"]
-    validate_config(config)
-
-    return {
-        "projects_dir": config["sync"]["projects_dir"],
-        "repositories": config["sync"]["repositories"],
-    }
 
 
 def validate_directory(directory: Path) -> None:
@@ -48,7 +15,7 @@ def validate_directory(directory: Path) -> None:
     rev_parse_cmd = run_cmd(["git", "-C", directory, "rev-parse"])
 
     if rev_parse_cmd.returncode != 0:
-        error(f"'{directory}' is not a git project")
+        error(f"'{directory}' is not a git repository")
         sys.exit(rev_parse_cmd.returncode)
 
 
@@ -69,12 +36,14 @@ def sync_repository(repository_path: Path) -> None:
 @click.command()
 def sync():
     """Sync local git repositories with remote versions"""
-    config = get_config()
-    projects_dir = config["projects_dir"]
-    repositories = config["repositories"]
+    user_settings = click.get_current_context().obj["user_settings"]
 
-    for repository in repositories:
-        repository_path = Path.home() / projects_dir / repository
+    if not user_settings or not user_settings.sync:
+        error(msg="Missing required sync configuration", tip=UserSettings.model_fields["sync"].description or "")
+        sys.exit(1)
+
+    for repository in user_settings.sync.repositories:
+        repository_path = Path.home() / user_settings.sync.directory / repository
 
         out(f"==> Updating {repository}", style="highlight")
         validate_directory(repository_path)
