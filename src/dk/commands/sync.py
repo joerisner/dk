@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
 
-import click
+import rich_click as click
 
 from ..config import UserSettings
 from ..utils import error, out, run_cmd, warn
@@ -36,7 +36,7 @@ def sync_repository(repository_path: Path) -> None:
 @click.command()
 def sync():
     """Sync local git repositories with remote versions"""
-    user_settings = click.get_current_context().obj["user_settings"]
+    user_settings = click.get_current_context().obj["user_settings"]  # type: ignore
 
     if not user_settings or not user_settings.sync:
         error(msg="Missing required sync configuration", tip=UserSettings.model_fields["sync"].description or "")
@@ -45,6 +45,6 @@ def sync():
     for repository in user_settings.sync.repositories:
         repository_path = Path.home() / user_settings.sync.directory / repository
 
-        out(f"==> Updating {repository}", style="highlight")
+        out(f"==> Updating [underline]{repository}[/underline]", style="highlight")
         validate_directory(repository_path)
         sync_repository(repository_path)

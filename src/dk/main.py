@@ -1,14 +1,13 @@
-import click
+import rich_click as click
 
-from .commands.docker import docker
-from .commands.sync import sync
+from .commands import docker, sync
 from .config import load_user_settings
+from .theme import RICH_CLICK_HELP_CONFIG
 
-CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
 
-
-@click.group(context_settings=CONTEXT_SETTINGS)
-@click.version_option()
+@click.group(context_settings={"help_option_names": ["-h", "--help"]})
+@click.version_option(version="1.0.0")
+@click.rich_config(help_config=RICH_CLICK_HELP_CONFIG)
 @click.pass_context
 def cli(ctx: click.Context) -> None:
     """

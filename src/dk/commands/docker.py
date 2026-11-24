@@ -1,6 +1,6 @@
 import sys
 
-import click
+import rich_click as click
 
 from ..utils import error, run_cmd, success
 
@@ -10,7 +10,8 @@ def run_docker(*args: str) -> str:
     process = run_cmd(["docker", *args])
 
     if process.returncode != 0:
-        error(f"`docker {' '.join(args)}` failed", tip=process.stderr[:142])  # Truncate long error message from Docker
+        # Truncate long error message from Docker to first 142 chars.
+        error(f"`[highlight]docker {' '.join(args)}[/highlight]` failed", tip=process.stderr[:142])
         sys.exit(process.returncode)
 
     return process.stdout
